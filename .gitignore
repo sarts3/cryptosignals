@@ -1,0 +1,13 @@
+*.pyc
+*.egg-info
+*.txt
+
+data_dev
+__pycache__/
+*/__pycache__/
+**/__pycache__/
+
+venv
+samples
+
+docker/common_environment.env

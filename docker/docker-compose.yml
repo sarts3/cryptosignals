@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  server:
+    image: cryptosignals:latest
+    command: "/run.sh"
+    environment:
+      - DEV=yes
+    ports:
+      - "8002:8000"
+    networks:
+      - database
+    volumes:
+      - ../cryptosignals:/code/cryptosignals
+      - ../price:/code/price
+      - ../scripts:/code/scripts
+      - ../fixtures:/code/fixtures
+      - ./run.sh:/run.sh
+    restart: always
+    env_file:
+      - common_environment.env
+
+networks:
+    database:
+      driver: bridge
