@@ -51,13 +51,13 @@ def write_body(body, interval, coin, current_price, threshold):
     references = {}
     for alt in COINS_SYMBOLS.values():
         try:
-            current_price = Price.objects.filter(coin=alt).last().price
-            time_of_threshold = Price.objects.filter(coin=coin, price=threshold).last().created_at
+            current_price = Price.objects.filter(coin=alt).first().price
+            time_of_threshold = Price.objects.filter(coin=coin, price=threshold).first().created_at
             reference_price = Price.objects.filter(
                 coin=alt,
                 created_at__gt=(time_of_threshold-timedelta(seconds=20)),
                 created_at__lt=(time_of_threshold+timedelta(seconds=20))
-                ).last().price
+                ).first().price
             difference =  (current_price - reference_price) / reference_price * 100
             color = "green" if difference > 0 else "red"
             message = f"<p style='color:{color}'>{alt} price has changed {round(difference, 2)}% since then at {time_of_threshold.strftime('%H:%M:%S')} </p>"

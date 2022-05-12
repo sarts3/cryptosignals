@@ -7,6 +7,7 @@ ADD requirements.txt /code/
 RUN set -ex \
   && apk update \
   && apk add --no-cache linux-headers sudo curl git gcc musl-dev \
+  && python -m pip install --upgrade pip \
   && pip install -r /code/requirements.txt \
   && apk --purge del postgresql-dev musl-dev\
   && rm -rf /var/lib/apt/lists/* \
