@@ -1,3 +1,4 @@
+import pytz
 import collections
 from datetime import datetime, timedelta
 from locale import currency
@@ -13,6 +14,7 @@ Price = apps.get_model('price', 'Price')
 Alarm = apps.get_model('price', 'Alarm')
 Job = apps.get_model('price', 'Job')
 
+madrid = pytz.timezone('Europe/Madrid')
 
 def new_batch():
     all_coins = COINS + ALTCOINS
@@ -60,7 +62,7 @@ def write_body(body, interval, coin, current_price, threshold):
                 ).first().price
             difference =  (current_price - reference_price) / reference_price * 100
             color = "green" if difference > 0 else "red"
-            message = f"<p style='color:{color}'>{alt} price has changed {round(difference, 2)}% since then at {time_of_threshold.strftime('%H:%M:%S')} </p>"
+            message = f"<p style='color:{color}'>{alt} price has changed {round(difference, 2)}% since then at {(time_of_threshold.astimezone(madrid)).strftime('%H:%M:%S')} </p>"
             references[difference] = message
         except AttributeError:
             continue

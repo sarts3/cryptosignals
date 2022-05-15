@@ -2,9 +2,9 @@ INTERVALS_TO_CHECK_CHANGES = [5, 15, 30, 60]
 
 INTERVALS_TO_CHECK_CHANGES_WITH_THRESHOLD = [
     (5, 1),
-    (15, 1), 
-    (30, 2),
-    (60, 2)
+    (15, 2), 
+    (30, 2.5),
+    (60, 3)
 ]
 
 COINS = [
