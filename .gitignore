@@ -1,6 +1,5 @@
 *.pyc
 *.egg-info
-*.txt
 
 data_dev
 __pycache__/
